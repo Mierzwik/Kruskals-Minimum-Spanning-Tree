@@ -9,10 +9,10 @@ def init(E):
 def find(nodes, U):
     if nodes[U] == None:
         return U
-    return find(nodes[U])
+    return find(nodes,nodes[U])
 
 def union(nodes,U0,U1):
-    temp = find(U0)
-    nodes[find(U1)] = temp
+    temp = find(nodes,U0)
+    nodes[find(nodes,U1)] = temp
     return temp
 
