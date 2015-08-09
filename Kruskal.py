@@ -16,7 +16,7 @@ def setup():
     cities = list()
 
     #Create and return sorted data in list
-    stuff = list()
+    data = list()
     for line in rawData:
         item = list()
         temp = line.split()
@@ -25,17 +25,16 @@ def setup():
         item.append(int(temp[2]))
         cities.append(temp[0])
         
-        stuff.append(item)
+        data.append(item)
 
     cities = sorted(set(cities))
-    return sorted(stuff, key=operator.itemgetter(2)),cities
+    return sorted(data, key=operator.itemgetter(2)),cities
 
 # Method to perform Kruskal's Algorithm    
 def kruskal(data,cities):
     distance = 0
     cities = init(cities)
-    it = int(len(data))
-    for edge in range(it):
+    for edge in range(len(data)):
         path = data.pop(0)
         if cities[path[0]] == None:
             union(cities, str(path[1]),str(path[0]))
