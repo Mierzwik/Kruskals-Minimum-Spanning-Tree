@@ -1,0 +1,6 @@
+A B 1
+B F 11
+A F 13
+A C 5
+C D 7
+D F 2

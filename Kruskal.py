@@ -5,7 +5,7 @@ import operator
 
 def setup():
     #Get information from file
-    theFile = open('city-pairs.txt')
+    theFile = open('test01.txt')
     rawData = theFile.read()
     theFile.close()
     
@@ -24,7 +24,7 @@ def setup():
         item.append(temp[1])
         item.append(int(temp[2]))
         cities.append(temp[0])
-        
+        cities.append(temp[1])
         data.append(item)
 
     cities = sorted(set(cities))
@@ -33,13 +33,18 @@ def setup():
 # Method to perform Kruskal's Algorithm    
 def kruskal(data,cities):
     distance = 0
+    result = list()
     cities = init(cities)
     for edge in range(len(data)):
         path = data.pop(0)
-        if cities[path[0]] == None:
-            union(cities, str(path[1]),str(path[0]))
+        #if (cities[path[0]] == None):
+        #If the two cities in the path do not have the same
+        #canonical representative, join them together
+        if find(cities,path[0]) != find(cities,path[1]):
+            union(cities, path[0],path[1])
+            result.append((path[0] + ' -> ' + path[1]))
             distance += path[2]
-    return cities,distance
+    return result,distance
 
 data,cities = setup()
 result,distance = kruskal(data,cities)
