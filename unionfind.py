@@ -23,6 +23,7 @@ def union(nodes,U0,U1):
             failed.append(U1)
         print('\nUnion failed: Element(s) ' + str(failed) + ' not found\n')
         return None
-    nodes[U0_temp] = U1_temp
+    if U0_temp != U1_temp:
+        nodes[U0_temp] = U1_temp
     return U1_temp
 
