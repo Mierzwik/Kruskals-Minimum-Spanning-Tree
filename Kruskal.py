@@ -1,16 +1,15 @@
 from unionfind import *
-from re import split
 from pprint import pprint
 import operator
 
 def setup():
     #Get information from file
-    theFile = open('test01.txt')
+    theFile = open('city-pairs.txt')
     rawData = theFile.read()
     theFile.close()
     
     #Split data string into list
-    rawData = split('\n',rawData)
+    rawData = rawData.split('\n')
     rawData = filter(bool,rawData)
     
     cities = list()
@@ -20,15 +19,11 @@ def setup():
     for line in rawData:
         item = list()
         temp = line.split()
-        item.append(temp[0])
-        item.append(temp[1])
-        item.append(int(temp[2]))
-        cities.append(temp[0])
-        cities.append(temp[1])
+        item.extend([temp[0],temp[1],int(temp[2])])
+        cities.extend([temp[0],temp[1]])
         data.append(item)
 
-    cities = sorted(set(cities))
-    return sorted(data, key=operator.itemgetter(2)),cities
+    return sorted(data, key=operator.itemgetter(2)),sorted(set(cities))
 
 # Method to perform Kruskal's Algorithm    
 def kruskal(data,cities):
@@ -37,9 +32,9 @@ def kruskal(data,cities):
     cities = init(cities)
     for edge in range(len(data)):
         path = data.pop(0)
-        #if (cities[path[0]] == None):
         #If the two cities in the path do not have the same
-        #canonical representative, join them together
+        #canonical representative, join them together, then 
+        #add path to result and calculate distance
         if find(cities,path[0]) != find(cities,path[1]):
             union(cities, path[0],path[1])
             result.append((path[0] + ' -> ' + path[1]))
