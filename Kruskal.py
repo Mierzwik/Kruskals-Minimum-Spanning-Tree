@@ -34,15 +34,13 @@ def setup():
 # Method to perform Kruskal's Algorithm    
 def kruskal(data,cities):
     distance = 0
-    #Create disjoined forests
     cities = init(cities)
-    for edge in range(len(data)):     
+    it = int(len(data))
+    for edge in range(it):
         path = data.pop(0)
-        # Since this is bi-directional, popping the next element
-        # gets rid of the extra one we have.
-        #data.pop(0)
-        if cities[str(path[0])] == None:
-            union(cities, str(path[0]),str(path[1]))
+        if cities[path[0]] == None:
+            union(cities, str(path[1]),str(path[0]))
+            distance += path[2]
     return cities,distance
 
 data,cities = setup()
