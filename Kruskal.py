@@ -1,7 +1,6 @@
 from unionfind import *
 from re import split
 from pprint import pprint
-from math import floor
 import operator
 
 def setup():
