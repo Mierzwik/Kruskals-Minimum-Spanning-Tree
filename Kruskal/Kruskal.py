@@ -37,7 +37,7 @@ def kruskal(data,cities):
         #add path to result and calculate distance
         if find(cities,path[0]) != find(cities,path[1]):
             union(cities, path[0],path[1])
-            result.append((path[0] + ' -> ' + path[1]))
+            result.extend((path[0] + ' -> ' + path[1], '(' + str(path[2]) + ' miles)'))
             distance += path[2]
     return result,distance
 
